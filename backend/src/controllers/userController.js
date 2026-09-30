@@ -1,14 +1,15 @@
-import { db } from '../db/jsonDb.js';
+import { User, Leaderboard, Notification } from '../models/index.js';
 import { initialUsers } from '../db/seedData.js';
 
 export const getProfile = async (req, res, next) => {
   try {
     const userId = req.params.id || (req.user && req.user.id) || 'usr_101';
-    const user = await db.findById('users', userId);
+    const user = await User.findOne({ id: userId });
     if (!user) {
       return res.status(404).json({ success: false, error: 'User not found' });
     }
-    const { passwordHash: _, ...safeUser } = user;
+    const userObj = user.toObject();
+    const { passwordHash: _, ...safeUser } = userObj;
     res.json({ success: true, user: safeUser });
   } catch (err) {
     next(err);
@@ -21,26 +22,30 @@ export const updateProfile = async (req, res, next) => {
     const { name, bio, role, avatar } = req.body;
 
     const updates = {};
-    if (name !== undefined) updates.name = name;
+    if (name !== undefined) updates.name = name.trim();
     if (bio !== undefined) updates.bio = bio;
     if (role !== undefined) updates.role = role;
     if (avatar !== undefined) updates.avatar = avatar;
 
-    const updated = await db.update('users', userId, updates);
+    const updated = await User.findOneAndUpdate(
+      { id: userId },
+      { $set: updates },
+      { returnDocument: 'after' }
+    );
     if (!updated) {
       return res.status(404).json({ success: false, error: 'User not found' });
     }
 
     // Also update leaderboard if name/avatar changed
-    const leaderboardItem = await db.findOne('leaderboard', item => item.userId === userId);
-    if (leaderboardItem) {
-      await db.update('leaderboard', leaderboardItem.id, {
-        name: updated.name,
-        avatar: updated.avatar,
-      });
+    if (updates.name || updates.avatar) {
+      const leaderUpdates = {};
+      if (updates.name) leaderUpdates.name = updates.name;
+      if (updates.avatar) leaderUpdates.avatar = updates.avatar;
+      await Leaderboard.findOneAndUpdate({ userId }, { $set: leaderUpdates });
     }
 
-    const { passwordHash: _, ...safeUser } = updated;
+    const userObj = updated.toObject();
+    const { passwordHash: _, ...safeUser } = userObj;
     res.json({
       success: true,
       message: 'Profile updated successfully',
@@ -54,18 +59,24 @@ export const updateProfile = async (req, res, next) => {
 export const updatePreferences = async (req, res, next) => {
   try {
     const userId = (req.user && req.user.id) || 'usr_101';
-    const current = await db.findById('users', userId);
+    const current = await User.findOne({ id: userId });
     if (!current) {
       return res.status(404).json({ success: false, error: 'User not found' });
     }
 
+    const currentPrefs = current.preferences ? current.preferences.toObject?.() || current.preferences : {};
     const newPreferences = {
-      ...(current.preferences || {}),
+      ...currentPrefs,
       ...req.body,
     };
 
-    const updated = await db.update('users', userId, { preferences: newPreferences });
-    const { passwordHash: _, ...safeUser } = updated;
+    const updated = await User.findOneAndUpdate(
+      { id: userId },
+      { $set: { preferences: newPreferences } },
+      { returnDocument: 'after' }
+    );
+    const userObj = updated.toObject();
+    const { passwordHash: _, ...safeUser } = userObj;
 
     res.json({
       success: true,
@@ -88,7 +99,7 @@ export const addXP = async (req, res, next) => {
       return res.status(400).json({ success: false, error: 'Valid positive amount of XP required' });
     }
 
-    const user = await db.findById('users', userId);
+    const user = await User.findOne({ id: userId });
     if (!user) {
       return res.status(404).json({ success: false, error: 'User not found' });
     }
@@ -104,17 +115,31 @@ export const addXP = async (req, res, next) => {
       leveledUp = true;
     }
 
-    const levelTitle = newLevel >= 10 ? 'Legendary Grandmaster' : newLevel >= 8 ? 'Code Magus' : newLevel >= 7 ? 'Code Conjurer' : 'Apprentice Coder';
+    const levelTitle =
+      newLevel >= 10
+        ? 'Legendary Grandmaster'
+        : newLevel >= 8
+        ? 'Code Magus'
+        : newLevel >= 7
+        ? 'Code Conjurer'
+        : 'Apprentice Coder';
 
-    const updatedUser = await db.update('users', userId, {
-      currentXP: newXP,
-      level: newLevel,
-      nextLevelXP: newNextXP,
-      levelTitle,
-    });
+    const updatedUser = await User.findOneAndUpdate(
+      { id: userId },
+      {
+        $set: {
+          currentXP: newXP,
+          level: newLevel,
+          nextLevelXP: newNextXP,
+          levelTitle,
+        },
+      },
+      { returnDocument: 'after' }
+    );
 
     if (leveledUp) {
-      await db.insert('notifications', {
+      await Notification.create({
+        id: `notif_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
         userId,
         title: `Level Up! Reached Level ${newLevel} 🚀`,
         message: `Congratulations! You unlocked new skill paths and reached Level ${newLevel}!`,
@@ -124,19 +149,21 @@ export const addXP = async (req, res, next) => {
     }
 
     // Update user in leaderboard
-    const leaderItem = await db.findOne('leaderboard', item => item.userId === userId);
+    const leaderItem = await Leaderboard.findOne({ userId });
     if (leaderItem) {
-      await db.update('leaderboard', leaderItem.id, { xp: newXP });
-      // Re-sort leaderboard
-      const allLeaderboard = await db.getAll('leaderboard');
-      allLeaderboard.sort((a, b) => b.xp - a.xp);
-      allLeaderboard.forEach((item, idx) => {
-        item.rank = idx + 1;
-      });
-      await db.write('leaderboard', allLeaderboard);
+      leaderItem.xp = newXP;
+      await leaderItem.save();
+
+      // Re-sort leaderboard ranks
+      const allLeaderboard = await Leaderboard.find().sort({ xp: -1 });
+      for (let i = 0; i < allLeaderboard.length; i++) {
+        allLeaderboard[i].rank = i + 1;
+        await allLeaderboard[i].save();
+      }
     }
 
-    const { passwordHash: _, ...safeUser } = updatedUser;
+    const userObj = updatedUser.toObject();
+    const { passwordHash: _, ...safeUser } = userObj;
 
     res.json({
       success: true,
@@ -155,21 +182,23 @@ export const addXP = async (req, res, next) => {
 export const incrementStreak = async (req, res, next) => {
   try {
     const userId = (req.user && req.user.id) || 'usr_101';
-    const user = await db.findById('users', userId);
+    const user = await User.findOne({ id: userId });
     if (!user) {
       return res.status(404).json({ success: false, error: 'User not found' });
     }
 
     const newStreak = (user.dailyStreak || 0) + 1;
-    const updated = await db.update('users', userId, { dailyStreak: newStreak });
+    const updated = await User.findOneAndUpdate(
+      { id: userId },
+      { $set: { dailyStreak: newStreak } },
+      { returnDocument: 'after' }
+    );
 
     // Update leaderboard streak
-    const leaderItem = await db.findOne('leaderboard', item => item.userId === userId);
-    if (leaderItem) {
-      await db.update('leaderboard', leaderItem.id, { streak: newStreak });
-    }
+    await Leaderboard.findOneAndUpdate({ userId }, { $set: { streak: newStreak } });
 
-    const { passwordHash: _, ...safeUser } = updated;
+    const userObj = updated.toObject();
+    const { passwordHash: _, ...safeUser } = userObj;
     res.json({
       success: true,
       dailyStreak: newStreak,
@@ -184,12 +213,20 @@ export const resetDemoData = async (req, res, next) => {
   try {
     const defaultAlex = initialUsers.find(u => u.id === 'usr_101');
     if (defaultAlex) {
-      await db.update('users', 'usr_101', defaultAlex);
+      await User.findOneAndUpdate(
+        { id: 'usr_101' },
+        { $set: defaultAlex },
+        { returnDocument: 'after' }
+      );
     }
+    const updated = await User.findOne({ id: 'usr_101' });
+    const userObj = updated ? updated.toObject() : defaultAlex;
+    const { passwordHash: _, ...safeUser } = userObj;
+
     res.json({
       success: true,
       message: 'Demo user data reset to factory state',
-      user: defaultAlex,
+      user: safeUser,
     });
   } catch (err) {
     next(err);

@@ -1,14 +1,17 @@
-import { db } from '../db/jsonDb.js';
+import mongoose from 'mongoose';
+import { Notification } from '../models/index.js';
 
 export const getNotifications = async (req, res, next) => {
   try {
     const userId = (req.user && req.user.id) || 'usr_101';
-    const all = await db.getAll('notifications');
-    const userNotifs = all.filter(n => !n.userId || n.userId === userId);
+    const notifications = await Notification.find({
+      $or: [{ userId }, { userId: { $exists: false } }, { userId: null }],
+    }).sort({ createdAt: -1 });
+
     res.json({
       success: true,
-      notifications: userNotifs,
-      unreadCount: userNotifs.filter(n => n.unread).length,
+      notifications,
+      unreadCount: notifications.filter(n => n.unread).length,
     });
   } catch (err) {
     next(err);
@@ -18,12 +21,21 @@ export const getNotifications = async (req, res, next) => {
 export const markRead = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const notif = await db.findById('notifications', id);
+    let notif = await Notification.findOne({ id });
+    if (!notif && mongoose.Types.ObjectId.isValid(id)) {
+      notif = await Notification.findById(id);
+    }
+
     if (!notif) {
       return res.status(404).json({ success: false, error: 'Notification not found' });
     }
 
-    const updated = await db.update('notifications', id, { unread: false });
+    const updated = await Notification.findOneAndUpdate(
+      { _id: notif._id },
+      { $set: { unread: false } },
+      { returnDocument: 'after' }
+    );
+
     res.json({ success: true, notification: updated });
   } catch (err) {
     next(err);
@@ -33,15 +45,11 @@ export const markRead = async (req, res, next) => {
 export const markAllRead = async (req, res, next) => {
   try {
     const userId = (req.user && req.user.id) || 'usr_101';
-    const all = await db.getAll('notifications');
-    const updated = all.map(n => {
-      if (!n.userId || n.userId === userId) {
-        return { ...n, unread: false };
-      }
-      return n;
-    });
+    await Notification.updateMany(
+      { $or: [{ userId }, { userId: { $exists: false } }, { userId: null }] },
+      { $set: { unread: false } }
+    );
 
-    await db.write('notifications', updated);
     res.json({
       success: true,
       message: 'All notifications marked as read',

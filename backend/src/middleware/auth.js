@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import { config } from '../config/index.js';
-import { db } from '../db/jsonDb.js';
+import { User } from '../models/User.js';
 
 export const authenticate = async (req, res, next) => {
   try {
@@ -15,7 +15,13 @@ export const authenticate = async (req, res, next) => {
     const token = authHeader.split(' ')[1];
     const decoded = jwt.verify(token, config.jwtSecret);
 
-    const user = await db.findById('users', decoded.id);
+    const user = await User.findOne({
+      $or: [
+        { id: decoded.id },
+        ...(decoded.email ? [{ email: decoded.email.toLowerCase() }] : []),
+      ],
+    });
+
     if (!user) {
       return res.status(401).json({
         success: false,
@@ -23,7 +29,8 @@ export const authenticate = async (req, res, next) => {
       });
     }
 
-    const { passwordHash, ...safeUser } = user;
+    const userObj = user.toObject();
+    const { passwordHash, ...safeUser } = userObj;
     req.user = safeUser;
     next();
   } catch (err) {
@@ -41,9 +48,15 @@ export const optionalAuthenticate = async (req, res, next) => {
     if (authHeader && authHeader.startsWith('Bearer ')) {
       const token = authHeader.split(' ')[1];
       const decoded = jwt.verify(token, config.jwtSecret);
-      const user = await db.findById('users', decoded.id);
+      const user = await User.findOne({
+        $or: [
+          { id: decoded.id },
+          ...(decoded.email ? [{ email: decoded.email.toLowerCase() }] : []),
+        ],
+      });
       if (user) {
-        const { passwordHash, ...safeUser } = user;
+        const userObj = user.toObject();
+        const { passwordHash, ...safeUser } = userObj;
         req.user = safeUser;
         return next();
       }
@@ -53,9 +66,10 @@ export const optionalAuthenticate = async (req, res, next) => {
   }
 
   // Fallback to default demo user Alex Morgan for convenience in dev
-  const demoUser = await db.findById('users', 'usr_101');
+  const demoUser = await User.findOne({ id: 'usr_101' });
   if (demoUser) {
-    const { passwordHash, ...safeUser } = demoUser;
+    const demoObj = demoUser.toObject();
+    const { passwordHash, ...safeUser } = demoObj;
     req.user = safeUser;
   }
   next();

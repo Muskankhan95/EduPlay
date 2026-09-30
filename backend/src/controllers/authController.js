@@ -1,6 +1,6 @@
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import { db } from '../db/jsonDb.js';
+import { User, Badge } from '../models/index.js';
 import { config } from '../config/index.js';
 
 const generateToken = (user) => {
@@ -22,7 +22,8 @@ export const register = async (req, res, next) => {
       });
     }
 
-    const existingUser = await db.findOne('users', u => u.email.toLowerCase() === email.toLowerCase());
+    const normalizedEmail = email.toLowerCase().trim();
+    const existingUser = await User.findOne({ email: normalizedEmail });
     if (existingUser) {
       return res.status(400).json({
         success: false,
@@ -31,13 +32,14 @@ export const register = async (req, res, next) => {
     }
 
     const passwordHash = await bcrypt.hash(password, 10);
-    const newUser = {
-      id: `usr_${Date.now()}`,
-      name,
-      email: email.toLowerCase(),
+    const userId = `usr_${Date.now()}`;
+    const newUser = await User.create({
+      id: userId,
+      name: name.trim(),
+      email: normalizedEmail,
       passwordHash,
       role: learningGoal ? `${learningGoal} Pioneer` : 'Apprentice Coder',
-      avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(name)}`,
+      avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(name.trim())}`,
       level: 1,
       levelTitle: 'Novice Builder',
       currentXP: 100, // Starter bonus
@@ -60,18 +62,18 @@ export const register = async (req, res, next) => {
         reminderTime: '20:00',
         theme: 'light',
       },
-    };
-
-    await db.insert('users', newUser);
+    });
 
     // Give starter badge
-    const starterBadge = await db.findById('badges', 'b-1');
-    if (starterBadge) {
-      await db.update('badges', 'b-1', { unlocked: true, unlockedAt: 'Just now' });
-    }
+    await Badge.findOneAndUpdate(
+      { id: 'b-1' },
+      { unlocked: true, unlockedAt: 'Just now' },
+      { returnDocument: 'after' }
+    );
 
-    const token = generateToken(newUser);
-    const { passwordHash: _, ...safeUser } = newUser;
+    const userObj = newUser.toObject();
+    const token = generateToken(userObj);
+    const { passwordHash: _, ...safeUser } = userObj;
 
     res.status(201).json({
       success: true,
@@ -80,6 +82,12 @@ export const register = async (req, res, next) => {
       user: safeUser,
     });
   } catch (err) {
+    if (err.code === 11000) {
+      return res.status(400).json({
+        success: false,
+        error: 'An account with this email already exists',
+      });
+    }
     next(err);
   }
 };
@@ -95,7 +103,8 @@ export const login = async (req, res, next) => {
       });
     }
 
-    const user = await db.findOne('users', u => u.email.toLowerCase() === email.toLowerCase());
+    const normalizedEmail = email.toLowerCase().trim();
+    const user = await User.findOne({ email: normalizedEmail });
     if (!user) {
       return res.status(401).json({
         success: false,
@@ -111,8 +120,9 @@ export const login = async (req, res, next) => {
       });
     }
 
-    const token = generateToken(user);
-    const { passwordHash: _, ...safeUser } = user;
+    const userObj = user.toObject();
+    const token = generateToken(userObj);
+    const { passwordHash: _, ...safeUser } = userObj;
 
     res.json({
       success: true,
@@ -127,7 +137,7 @@ export const login = async (req, res, next) => {
 
 export const demoLogin = async (req, res, next) => {
   try {
-    const user = await db.findById('users', 'usr_101');
+    const user = await User.findOne({ id: 'usr_101' });
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -135,8 +145,9 @@ export const demoLogin = async (req, res, next) => {
       });
     }
 
-    const token = generateToken(user);
-    const { passwordHash: _, ...safeUser } = user;
+    const userObj = user.toObject();
+    const token = generateToken(userObj);
+    const { passwordHash: _, ...safeUser } = userObj;
 
     res.json({
       success: true,
@@ -159,7 +170,8 @@ export const forgotPassword = async (req, res, next) => {
       });
     }
 
-    const user = await db.findOne('users', u => u.email.toLowerCase() === email.toLowerCase());
+    const normalizedEmail = email.toLowerCase().trim();
+    const user = await User.findOne({ email: normalizedEmail });
     if (!user) {
       return res.status(404).json({
         success: false,
@@ -167,7 +179,6 @@ export const forgotPassword = async (req, res, next) => {
       });
     }
 
-    // In a production email scenario, we would send a tokenized link
     res.json({
       success: true,
       message: `Password reset instructions sent to ${email}`,
@@ -183,11 +194,12 @@ export const getMe = async (req, res, next) => {
     if (!req.user) {
       return res.status(401).json({ success: false, error: 'Unauthorized' });
     }
-    const user = await db.findById('users', req.user.id);
+    const user = await User.findOne({ id: req.user.id });
     if (!user) {
       return res.status(404).json({ success: false, error: 'User not found' });
     }
-    const { passwordHash: _, ...safeUser } = user;
+    const userObj = user.toObject();
+    const { passwordHash: _, ...safeUser } = userObj;
     res.json({
       success: true,
       user: safeUser,

@@ -18,5 +18,25 @@
         "total": 6
       }
     }
+  },
+  {
+    "id": "quiz_res_1790746803579",
+    "createdAt": "2026-09-30T05:40:03.588Z",
+    "userId": "usr_1790694375211",
+    "quizId": "eduquest-py-level-1",
+    "score": 1300,
+    "accuracy": 80,
+    "xpEarned": 305,
+    "timeTaken": 98,
+    "correctAnswers": 4,
+    "wrongAnswers": 1,
+    "maxCombo": 1,
+    "completedAt": "2026-09-30T05:40:03.580Z",
+    "topicStats": {
+      "Python Basics": {
+        "correct": 4,
+        "total": 5
+      }
+    }
   }
 ]

@@ -48,5 +48,14 @@
     "message": "Congratulations! You unlocked new skill paths and reached Level 2!",
     "time": "Just now",
     "unread": true
+  },
+  {
+    "id": "id_1790746803617_ea72u",
+    "createdAt": "2026-09-30T05:40:03.617Z",
+    "userId": "usr_1790694375211",
+    "title": "Level Up! Reached Level 4 🚀",
+    "message": "Congratulations! You unlocked new skill paths and reached Level 4!",
+    "time": "Just now",
+    "unread": true
   }
 ]

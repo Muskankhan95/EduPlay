@@ -1,9 +1,8 @@
-import { db } from '../db/jsonDb.js';
+import { DailyChallenge, User, Notification } from '../models/index.js';
 
 export const getDailyChallenge = async (req, res, next) => {
   try {
-    const challenges = await db.getAll('dailyChallenges');
-    const challenge = challenges[0] || null;
+    const challenge = await DailyChallenge.findOne();
     res.json({ success: true, challenge });
   } catch (err) {
     next(err);
@@ -15,8 +14,7 @@ export const submitDailyChallenge = async (req, res, next) => {
     const { optionId } = req.body;
     const userId = (req.user && req.user.id) || 'usr_101';
 
-    const challenges = await db.getAll('dailyChallenges');
-    const challenge = challenges[0];
+    const challenge = await DailyChallenge.findOne();
     if (!challenge) {
       return res.status(404).json({ success: false, error: 'No active daily challenge found' });
     }
@@ -28,10 +26,14 @@ export const submitDailyChallenge = async (req, res, next) => {
 
     if (selectedOption.correct) {
       // Mark challenge completed
-      await db.update('dailyChallenges', challenge.id, { completed: true });
+      await DailyChallenge.findOneAndUpdate(
+        { _id: challenge._id },
+        { $set: { completed: true } },
+        { returnDocument: 'after' }
+      );
 
       // Award XP & increment streak
-      const user = await db.findById('users', userId);
+      const user = await User.findOne({ id: userId });
       let updatedUser = user;
       if (user) {
         const newXP = (user.currentXP || 0) + (challenge.xpReward || 100);
@@ -47,14 +49,21 @@ export const submitDailyChallenge = async (req, res, next) => {
           leveledUp = true;
         }
 
-        updatedUser = await db.update('users', userId, {
-          currentXP: newXP,
-          dailyStreak: newStreak,
-          level: newLevel,
-          nextLevelXP: newNextXP,
-        });
+        updatedUser = await User.findOneAndUpdate(
+          { id: userId },
+          {
+            $set: {
+              currentXP: newXP,
+              dailyStreak: newStreak,
+              level: newLevel,
+              nextLevelXP: newNextXP,
+            },
+          },
+          { returnDocument: 'after' }
+        );
 
-        await db.insert('notifications', {
+        await Notification.create({
+          id: `notif_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
           userId,
           title: 'Daily Challenge Mastered! 🔥',
           message: `You earned +${challenge.xpReward} XP and your streak is now ${newStreak} days!`,
@@ -63,12 +72,17 @@ export const submitDailyChallenge = async (req, res, next) => {
         });
       }
 
-      const { passwordHash: _, ...safeUser } = updatedUser || {};
+      const safeUser = updatedUser ? (() => {
+        const u = updatedUser.toObject ? updatedUser.toObject() : updatedUser;
+        const { passwordHash: _, ...rest } = u;
+        return rest;
+      })() : null;
+
       return res.json({
         success: true,
         explanation: challenge.explanation,
         xpAwarded: challenge.xpReward,
-        user: updatedUser ? safeUser : null,
+        user: safeUser,
       });
     } else {
       return res.json({

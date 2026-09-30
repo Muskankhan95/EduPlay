@@ -1,9 +1,8 @@
-import { db } from '../db/jsonDb.js';
+import { Analytics } from '../models/index.js';
 
 export const getAnalyticsOverview = async (req, res, next) => {
   try {
-    const list = await db.getAll('analytics');
-    const data = list[0] || {};
+    const data = (await Analytics.findOne()) || {};
     res.json({
       success: true,
       data,
@@ -15,8 +14,7 @@ export const getAnalyticsOverview = async (req, res, next) => {
 
 export const getWeeklyActivity = async (req, res, next) => {
   try {
-    const list = await db.getAll('analytics');
-    const data = list[0] || {};
+    const data = (await Analytics.findOne()) || {};
     res.json({
       success: true,
       weeklyActivity: data.weeklyActivity || [],
@@ -28,8 +26,7 @@ export const getWeeklyActivity = async (req, res, next) => {
 
 export const getSkillBreakdown = async (req, res, next) => {
   try {
-    const list = await db.getAll('analytics');
-    const data = list[0] || {};
+    const data = (await Analytics.findOne()) || {};
     res.json({
       success: true,
       skillBreakdown: data.skillBreakdown || [],
@@ -41,8 +38,7 @@ export const getSkillBreakdown = async (req, res, next) => {
 
 export const getAccuracyHistory = async (req, res, next) => {
   try {
-    const list = await db.getAll('analytics');
-    const data = list[0] || {};
+    const data = (await Analytics.findOne()) || {};
     res.json({
       success: true,
       accuracyHistory: data.accuracyHistory || [],

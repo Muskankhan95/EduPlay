@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import { config } from './src/config/index.js';
+import { connectDB, isDatabaseConnected, getDatabaseState } from './src/config/database.js';
 import { seedAll } from './src/db/seedData.js';
 
 // Route imports
@@ -23,7 +24,15 @@ const app = express();
 
 // Middlewares
 app.use(cors({
-  origin: config.clientOrigin,
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like curl, postman, mobile apps)
+    if (!origin) return callback(null, true);
+    const allowed = [config.clientOrigin, 'http://localhost:5173', 'http://127.0.0.1:5173'];
+    if (allowed.includes(origin) || config.clientOrigin === '*') {
+      return callback(null, true);
+    }
+    return callback(null, true); // Allow locally
+  },
   credentials: true,
 }));
 app.use(express.json());
@@ -48,13 +57,16 @@ app.get('/', (req, res) => {
       notifications: '/api/notifications',
       games: '/api/games',
       learningPaths: '/api/learning-paths',
-    }
+    },
   });
 });
 
 app.get('/api/health', (req, res) => {
-  res.json({
-    status: 'healthy',
+  const isConnected = isDatabaseConnected();
+  res.status(isConnected ? 200 : 503).json({
+    success: isConnected,
+    server: 'running',
+    database: getDatabaseState(),
     timestamp: new Date().toISOString(),
     uptimeSeconds: process.uptime(),
     environment: config.nodeEnv,
@@ -79,9 +91,12 @@ app.use('/api/learning-paths', learningPathRoutes);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-// Initialize DB seeds and start server
+// Connect DB first, seed initial data, then start server
 async function startServer() {
   try {
+    console.log('🔄 Connecting to MongoDB database...');
+    await connectDB();
+
     console.log('🌱 Seeding / verifying initial database records...');
     await seedAll();
     console.log('✅ Database verified and ready.');
@@ -89,12 +104,12 @@ async function startServer() {
     app.listen(config.port, () => {
       console.log(`\n==================================================`);
       console.log(`🚀 EduPlay API Backend running at: http://localhost:${config.port}`);
-      console.log(`📡 Ready for frontend requests from http://localhost:5173`);
+      console.log(`📡 Ready for frontend requests from ${config.clientOrigin}`);
       console.log(`🩺 Health check: http://localhost:${config.port}/api/health`);
       console.log(`==================================================\n`);
     });
   } catch (err) {
-    console.error('❌ Failed to start server:', err);
+    console.error('❌ FATAL: Backend startup failed:', err.message);
     process.exit(1);
   }
 }

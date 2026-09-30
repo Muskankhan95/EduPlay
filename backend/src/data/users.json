@@ -68,14 +68,14 @@
     "passwordHash": "$2a$10$yKQgJvMsdddKBYiLs6/7UeSO.OX9iaJ7xEHunuYat3cxyZiHfAlhC",
     "role": "Full-Stack Web Architect Pioneer",
     "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=Muskan%20Khan",
-    "level": 2,
+    "level": 4,
     "levelTitle": "Apprentice Coder",
-    "currentXP": 665,
-    "nextLevelXP": 675,
+    "currentXP": 970,
+    "nextLevelXP": 1229,
     "dailyStreak": 1,
     "streakFreeze": 1,
     "coursesCompleted": 0,
-    "quizAccuracy": 84,
+    "quizAccuracy": 82,
     "badgesEarned": 1,
     "totalBadges": 25,
     "totalHoursLearned": 0.5,
@@ -90,7 +90,7 @@
       "reminderTime": "20:00",
       "theme": "light"
     },
-    "updatedAt": "2026-09-29T18:37:23.859Z"
+    "updatedAt": "2026-09-30T05:40:03.634Z"
   },
   {
     "id": "usr_1790707235780",
@@ -123,5 +123,36 @@
       "theme": "light"
     },
     "updatedAt": "2026-09-30T03:27:57.188Z"
+  },
+  {
+    "id": "usr_1790743706924",
+    "createdAt": "2026-09-30T04:48:27.091Z",
+    "name": "Priya",
+    "email": "glimpseoflife17@gmail.com",
+    "passwordHash": "$2a$10$rU/BdSJ3GTHcBAsgMaQQs.zOcH.cXs/jePEiNEZDI76gD1h8.54XG",
+    "role": "Full-Stack Web Architect Pioneer",
+    "avatar": "https://api.dicebear.com/7.x/bottts/svg?seed=Priya",
+    "level": 1,
+    "levelTitle": "Novice Builder",
+    "currentXP": 100,
+    "nextLevelXP": 500,
+    "dailyStreak": 1,
+    "streakFreeze": 1,
+    "coursesCompleted": 0,
+    "quizAccuracy": 100,
+    "badgesEarned": 1,
+    "totalBadges": 25,
+    "totalHoursLearned": 0.5,
+    "league": "Bronze League",
+    "leagueRank": 12,
+    "joinedDate": "September 2026",
+    "bio": "Aspiring developer eager to master Full-Stack Web Architect.",
+    "preferences": {
+      "dailyGoalMinutes": 30,
+      "soundEffects": true,
+      "confettiEffects": true,
+      "reminderTime": "20:00",
+      "theme": "light"
+    }
   }
 ]

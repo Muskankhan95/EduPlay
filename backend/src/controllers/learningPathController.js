@@ -1,8 +1,8 @@
-import { db } from '../db/jsonDb.js';
+import { LearningPath } from '../models/index.js';
 
 export const getLearningPaths = async (req, res, next) => {
   try {
-    const paths = await db.getAll('learningPaths');
+    const paths = await LearningPath.find();
     res.json({
       success: true,
       learningPaths: paths,

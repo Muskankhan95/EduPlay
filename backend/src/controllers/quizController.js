@@ -1,11 +1,11 @@
-import { db } from '../db/jsonDb.js';
+import { QuizResult, User, Notification } from '../models/index.js';
 
 export const completeQuiz = async (req, res, next) => {
   try {
     const payload = req.body;
     const userId = payload.userId || (req.user && req.user.id) || 'usr_101';
 
-    const record = {
+    const record = await QuizResult.create({
       id: `quiz_res_${Date.now()}`,
       userId,
       quizId: payload.quizId || 'target-blaster-1',
@@ -18,13 +18,10 @@ export const completeQuiz = async (req, res, next) => {
       maxCombo: payload.maxCombo || 1,
       completedAt: new Date().toISOString(),
       topicStats: payload.topicStats || {},
-    };
+    });
 
-    // Store in quizResults collection
-    await db.insert('quizResults', record);
-
-    // Persist quiz accuracy and award completion XP when XP was not already awarded.
-    const user = await db.findById('users', userId);
+    // Persist quiz accuracy and award completion XP when XP was not already awarded
+    const user = await User.findOne({ id: userId });
     if (user) {
       const updates = {
         quizAccuracy: Math.round(((user.quizAccuracy || 90) + (payload.accuracy || 0)) / 2),
@@ -49,7 +46,8 @@ export const completeQuiz = async (req, res, next) => {
         });
 
         if (leveledUp) {
-          await db.insert('notifications', {
+          await Notification.create({
+            id: `notif_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
             userId,
             title: `Level Up! Reached Level ${newLevel} 🚀`,
             message: `Congratulations! You unlocked new skill paths and reached Level ${newLevel}!`,
@@ -59,28 +57,27 @@ export const completeQuiz = async (req, res, next) => {
         }
       }
 
-      await db.update('users', userId, updates);
+      await User.findOneAndUpdate({ id: userId }, { $set: updates }, { returnDocument: 'after' });
     }
 
     // Adaptive Recommendation Calculation
-    const existingAdaptive = (await db.getAll('quizResults'))
-      .filter(r => r.userId === userId)
-      .reduce((acc, curr) => {
-        if (curr.topicStats) {
-          Object.entries(curr.topicStats).forEach(([topic, stats]) => {
-            if (!acc[topic]) acc[topic] = { correct: 0, total: 0, accuracy: 100 };
-            acc[topic].correct += stats.correct || 0;
-            acc[topic].total += stats.total || 0;
-            acc[topic].accuracy = Math.round((acc[topic].correct / (acc[topic].total || 1)) * 100);
-          });
-        }
-        return acc;
-      }, {
-        "Arrays": { correct: 9, total: 10, accuracy: 90 },
-        "Stacks": { correct: 7, total: 8, accuracy: 88 },
-        "Queues": { correct: 3, total: 6, accuracy: 50 },
-        "Hash Tables": { correct: 5, total: 5, accuracy: 100 },
-      });
+    const allResults = await QuizResult.find({ userId });
+    const existingAdaptive = allResults.reduce((acc, curr) => {
+      if (curr.topicStats) {
+        Object.entries(curr.topicStats).forEach(([topic, stats]) => {
+          if (!acc[topic]) acc[topic] = { correct: 0, total: 0, accuracy: 100 };
+          acc[topic].correct += stats.correct || 0;
+          acc[topic].total += stats.total || 0;
+          acc[topic].accuracy = Math.round((acc[topic].correct / (acc[topic].total || 1)) * 100);
+        });
+      }
+      return acc;
+    }, {
+      "Arrays": { correct: 9, total: 10, accuracy: 90 },
+      "Stacks": { correct: 7, total: 8, accuracy: 88 },
+      "Queues": { correct: 3, total: 6, accuracy: 50 },
+      "Hash Tables": { correct: 5, total: 5, accuracy: 100 },
+    });
 
     let weakestTopic = null;
     let lowestAcc = 100;
@@ -120,7 +117,7 @@ export const completeQuiz = async (req, res, next) => {
 export const getAdaptiveRecommendations = async (req, res, next) => {
   try {
     const userId = (req.user && req.user.id) || 'usr_101';
-    const results = (await db.getAll('quizResults')).filter(r => r.userId === userId);
+    const results = await QuizResult.find({ userId });
 
     const topicBreakdown = {
       "Arrays": { accuracy: 90, total: 10 },
@@ -172,8 +169,10 @@ export const getAdaptiveRecommendations = async (req, res, next) => {
 export const getQuizHistory = async (req, res, next) => {
   try {
     const userId = (req.user && req.user.id) || 'usr_101';
-    const all = await db.getAll('quizResults');
-    const userResults = all.filter(r => r.userId === userId).slice(-20).reverse();
+    const userResults = await QuizResult.find({ userId })
+      .sort({ createdAt: -1 })
+      .limit(20);
+
     res.json({
       success: true,
       history: userResults,

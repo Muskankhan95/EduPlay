@@ -1,8 +1,8 @@
-import { db } from '../db/jsonDb.js';
+import { TargetBlasterQuestion } from '../models/index.js';
 
 export const getTargetBlasterData = async (req, res, next) => {
   try {
-    const questions = await db.getAll('targetBlasterQuestions');
+    const questions = await TargetBlasterQuestion.find().sort({ id: 1 });
     res.json({
       success: true,
       config: {
