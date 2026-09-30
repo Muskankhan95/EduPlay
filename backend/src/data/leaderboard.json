@@ -1,0 +1,85 @@
+[
+  {
+    "rank": 1,
+    "name": "Mateo Rossi",
+    "avatar": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200",
+    "xp": 3965,
+    "streak": 21,
+    "league": "Diamond",
+    "badge": "🥉 Speedster",
+    "userId": "usr_lead_3",
+    "updatedAt": "2026-09-29T14:58:21.033Z"
+  },
+  {
+    "rank": 2,
+    "name": "Zara Patel",
+    "avatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=200",
+    "xp": 3575,
+    "streak": 28,
+    "league": "Diamond",
+    "badge": "🥈 Code Wizard",
+    "userId": "usr_lead_2",
+    "updatedAt": "2026-09-29T14:54:47.538Z"
+  },
+  {
+    "rank": 3,
+    "name": "Liam Chen",
+    "avatar": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=200",
+    "xp": 3550,
+    "streak": 32,
+    "league": "Diamond",
+    "badge": "🥇 Grandmaster",
+    "userId": "usr_lead_1",
+    "updatedAt": "2026-09-29T14:54:32.476Z"
+  },
+  {
+    "rank": 4,
+    "name": "Alex Morgan",
+    "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=250",
+    "xp": 3420,
+    "streak": 14,
+    "league": "Diamond",
+    "badge": "⚡ Top 5",
+    "userId": "usr_101"
+  },
+  {
+    "rank": 5,
+    "name": "Hana Takahashi",
+    "avatar": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80&w=200",
+    "xp": 3290,
+    "streak": 19,
+    "league": "Diamond",
+    "badge": "🎯 Ace",
+    "userId": "usr_lead_5"
+  },
+  {
+    "rank": 6,
+    "name": "David Kim",
+    "avatar": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&q=80&w=200",
+    "xp": 2980,
+    "streak": 11,
+    "league": "Diamond",
+    "badge": "🔥 Streaker",
+    "userId": "usr_lead_6"
+  },
+  {
+    "rank": 7,
+    "name": "Aisha Diallo",
+    "avatar": "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=200",
+    "xp": 2850,
+    "streak": 9,
+    "league": "Diamond",
+    "badge": "💡 Scholar",
+    "userId": "usr_lead_7"
+  },
+  {
+    "rank": 8,
+    "name": "Lucas Müller",
+    "avatar": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&q=80&w=200",
+    "xp": 2640,
+    "streak": 15,
+    "league": "Diamond",
+    "badge": "🚀 Explorer",
+    "userId": "usr_lead_8"
+  }
+]

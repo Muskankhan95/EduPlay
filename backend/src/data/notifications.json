@@ -1,0 +1,52 @@
+[
+  {
+    "id": "notif-1",
+    "userId": "usr_101",
+    "title": "Streak Preserved! 🔥",
+    "message": "You logged in today! Your streak is now 14 days strong.",
+    "time": "10 mins ago",
+    "unread": true
+  },
+  {
+    "id": "notif-2",
+    "userId": "usr_101",
+    "title": "Daily Challenge Ready 🎯",
+    "message": "'Debug the Infinite Loop!' is waiting for you with +100 XP.",
+    "time": "1 hour ago",
+    "unread": true
+  },
+  {
+    "id": "notif-3",
+    "userId": "usr_101",
+    "title": "Leaderboard Update 🏆",
+    "message": "You climbed to Rank #4 in the Diamond League! Only 890 XP to Top 3.",
+    "time": "Yesterday",
+    "unread": false
+  },
+  {
+    "id": "notif-4",
+    "userId": "usr_101",
+    "title": "New Badge Unlocked 🎯",
+    "message": "You earned 'Quiz Grandmaster' for scoring 100% on 5 quizzes.",
+    "time": "2 days ago",
+    "unread": false
+  },
+  {
+    "id": "id_1790691597167_5irm5",
+    "createdAt": "2026-09-29T14:19:57.167Z",
+    "userId": "usr_101",
+    "title": "Daily Challenge Mastered! 🔥",
+    "message": "You earned +100 XP and your streak is now 15 days!",
+    "time": "Just now",
+    "unread": true
+  },
+  {
+    "id": "id_1790707043845_lmys0",
+    "createdAt": "2026-09-29T18:37:23.845Z",
+    "userId": "usr_1790694375211",
+    "title": "Level Up! Reached Level 2 🚀",
+    "message": "Congratulations! You unlocked new skill paths and reached Level 2!",
+    "time": "Just now",
+    "unread": true
+  }
+]

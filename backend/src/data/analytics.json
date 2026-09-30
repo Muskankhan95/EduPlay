@@ -1,0 +1,112 @@
+[
+  {
+    "weeklyActivity": [
+      {
+        "day": "Mon",
+        "hours": 1.2,
+        "xp": 240,
+        "lessons": 3
+      },
+      {
+        "day": "Tue",
+        "hours": 0.8,
+        "xp": 180,
+        "lessons": 2
+      },
+      {
+        "day": "Wed",
+        "hours": 1.5,
+        "xp": 320,
+        "lessons": 4
+      },
+      {
+        "day": "Thu",
+        "hours": 2.1,
+        "xp": 450,
+        "lessons": 5
+      },
+      {
+        "day": "Fri",
+        "hours": 1,
+        "xp": 210,
+        "lessons": 2
+      },
+      {
+        "day": "Sat",
+        "hours": 2.8,
+        "xp": 580,
+        "lessons": 6
+      },
+      {
+        "day": "Sun (Today)",
+        "hours": 1.4,
+        "xp": 310,
+        "lessons": 3
+      }
+    ],
+    "skillBreakdown": [
+      {
+        "subject": "Python & Logic",
+        "score": 88,
+        "fullMark": 100
+      },
+      {
+        "subject": "Web & React",
+        "score": 92,
+        "fullMark": 100
+      },
+      {
+        "subject": "Algorithms",
+        "score": 76,
+        "fullMark": 100
+      },
+      {
+        "subject": "Data & AI",
+        "score": 64,
+        "fullMark": 100
+      },
+      {
+        "subject": "Security",
+        "score": 70,
+        "fullMark": 100
+      },
+      {
+        "subject": "System Design",
+        "score": 58,
+        "fullMark": 100
+      }
+    ],
+    "accuracyHistory": [
+      {
+        "week": "Wk 1",
+        "accuracy": 82,
+        "quizzes": 8
+      },
+      {
+        "week": "Wk 2",
+        "accuracy": 86,
+        "quizzes": 12
+      },
+      {
+        "week": "Wk 3",
+        "accuracy": 89,
+        "quizzes": 14
+      },
+      {
+        "week": "Wk 4",
+        "accuracy": 91,
+        "quizzes": 15
+      },
+      {
+        "week": "Wk 5",
+        "accuracy": 93,
+        "quizzes": 18
+      },
+      {
+        "week": "Wk 6 (Current)",
+        "accuracy": 96,
+        "quizzes": 16
+      }
+    ]
+  }
+]

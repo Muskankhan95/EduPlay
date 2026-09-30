@@ -1,0 +1,147 @@
+[
+  {
+    "id": "path-fs",
+    "title": "Full-Stack Web Architect",
+    "description": "From semantic HTML & modern CSS to React, Node.js, databases and cloud deployment.",
+    "totalXP": 5500,
+    "estimatedWeeks": 12,
+    "category": "Web & Software",
+    "color": "from-blue-600 to-indigo-600",
+    "nodes": [
+      {
+        "id": "n-1",
+        "title": "HTML5 & CSS Modern Grid/Flexbox",
+        "status": "completed",
+        "xp": 600,
+        "icon": "🎨"
+      },
+      {
+        "id": "n-2",
+        "title": "JavaScript ES6+ & DOM Events",
+        "status": "completed",
+        "xp": 900,
+        "icon": "⚡"
+      },
+      {
+        "id": "n-3",
+        "title": "React Component Lifecycle & Hooks",
+        "status": "current",
+        "xp": 1200,
+        "icon": "⚛️"
+      },
+      {
+        "id": "n-4",
+        "title": "State Management & Next.js Basics",
+        "status": "locked",
+        "xp": 1100,
+        "icon": "🔄"
+      },
+      {
+        "id": "n-5",
+        "title": "REST APIs, Node & Express Backends",
+        "status": "locked",
+        "xp": 1000,
+        "icon": "🚀"
+      },
+      {
+        "id": "n-6",
+        "title": "PostgreSQL & Database Design",
+        "status": "locked",
+        "xp": 700,
+        "icon": "💾"
+      }
+    ]
+  },
+  {
+    "id": "path-py",
+    "title": "Python Data & Automation Specialist",
+    "description": "Automate boring tasks, analyze complex data sets, and build backend microservices with Python.",
+    "totalXP": 4800,
+    "estimatedWeeks": 10,
+    "category": "Python & Data",
+    "color": "from-emerald-600 to-teal-600",
+    "nodes": [
+      {
+        "id": "py-n-1",
+        "title": "Python Syntax & Data Structures",
+        "status": "completed",
+        "xp": 800,
+        "icon": "🐍"
+      },
+      {
+        "id": "py-n-2",
+        "title": "Loops, Iterations & Functions",
+        "status": "current",
+        "xp": 850,
+        "icon": "🔁"
+      },
+      {
+        "id": "py-n-3",
+        "title": "Pandas & Data Wrangling",
+        "status": "locked",
+        "xp": 1100,
+        "icon": "📊"
+      },
+      {
+        "id": "py-n-4",
+        "title": "Data Visualization & Dashboards",
+        "status": "locked",
+        "xp": 950,
+        "icon": "📈"
+      },
+      {
+        "id": "py-n-5",
+        "title": "FastAPI Backend & Scrapers",
+        "status": "locked",
+        "xp": 1100,
+        "icon": "⚡"
+      }
+    ]
+  },
+  {
+    "id": "path-ai",
+    "title": "AI & Neural Networks Engineer",
+    "description": "Deep dive into machine learning models, transformers, prompt engineering, and model fine-tuning.",
+    "totalXP": 6200,
+    "estimatedWeeks": 14,
+    "category": "AI & ML",
+    "color": "from-purple-600 to-pink-600",
+    "nodes": [
+      {
+        "id": "ai-n-1",
+        "title": "Linear Algebra & Probability for AI",
+        "status": "completed",
+        "xp": 900,
+        "icon": "📐"
+      },
+      {
+        "id": "ai-n-2",
+        "title": "Scikit-Learn Classification & Regression",
+        "status": "locked",
+        "xp": 1200,
+        "icon": "🤖"
+      },
+      {
+        "id": "ai-n-3",
+        "title": "Neural Networks & Backpropagation",
+        "status": "locked",
+        "xp": 1400,
+        "icon": "🧠"
+      },
+      {
+        "id": "ai-n-4",
+        "title": "Computer Vision & CNNs",
+        "status": "locked",
+        "xp": 1300,
+        "icon": "👁️"
+      },
+      {
+        "id": "ai-n-5",
+        "title": "Transformers & LLM Integrations",
+        "status": "locked",
+        "xp": 1400,
+        "icon": "✨"
+      }
+    ]
+  }
+]

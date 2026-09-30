@@ -1,0 +1,570 @@
+// EduPlay: UnityLearn - Comprehensive Mock Data
+
+export const initialUserData = {
+  id: "usr_101",
+  name: "Alex Morgan",
+  email: "alex.morgan@eduplay.io",
+  role: "Full-Stack Apprentice",
+  avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=250",
+  level: 7,
+  levelTitle: "Code Conjurer",
+  currentXP: 3420,
+  nextLevelXP: 4500,
+  dailyStreak: 14,
+  streakFreeze: 2,
+  coursesCompleted: 6,
+  quizAccuracy: 94,
+  badgesEarned: 18,
+  totalBadges: 25,
+  totalHoursLearned: 58.5,
+  league: "Diamond League",
+  leagueRank: 4,
+  joinedDate: "October 2025",
+  bio: "Passionate about building full-stack web applications and machine learning experiments. Learning 30 mins every day!",
+  preferences: {
+    dailyGoalMinutes: 30,
+    soundEffects: true,
+    confettiEffects: true,
+    reminderTime: "20:00",
+    theme: "light",
+  },
+};
+
+export const coursesData = [
+  {
+    id: "py-101",
+    title: "Python Programming: Zero to Hero",
+    slug: "python-programming",
+    category: "Python",
+    difficulty: "Beginner",
+    rating: 4.9,
+    ratingCount: 1420,
+    enrolledCount: 14280,
+    totalLessons: 32,
+    completedLessons: 21,
+    xpReward: 850,
+    estimatedHours: 18,
+    image: "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=600",
+    badgeIcon: "🐍",
+    instructor: {
+      name: "Dr. Elena Rostova",
+      title: "Senior Python Architect & CS Professor",
+      avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200",
+    },
+    description: "Master Python fundamentals from data types to object-oriented programming with interactive coding challenges and automated unit tests.",
+    currentLesson: {
+      id: "py-l-22",
+      title: "Loops and Iterations",
+      module: "Module 4: Control Flow & Iterations",
+      duration: "12 min",
+      type: "interactive",
+    },
+    modules: [
+      {
+        id: "mod-1",
+        title: "Module 1: Foundations & Variables",
+        lessons: [
+          { id: "py-l-1", title: "Introduction to Python & Syntax", duration: "8 min", type: "theory", completed: true, xp: 25 },
+          { id: "py-l-2", title: "Variables, Numbers & String Formatting", duration: "12 min", type: "interactive", completed: true, xp: 35 },
+          { id: "py-l-3", title: "Quiz: Data Types & Casting", duration: "10 min", type: "quiz", completed: true, xp: 50 },
+        ],
+      },
+      {
+        id: "mod-2",
+        title: "Module 2: Lists, Dictionaries & Tuples",
+        lessons: [
+          { id: "py-l-4", title: "Lists & Array Operations", duration: "15 min", type: "interactive", completed: true, xp: 40 },
+          { id: "py-l-5", title: "Dictionary Key-Value Maps", duration: "14 min", type: "interactive", completed: true, xp: 40 },
+          { id: "py-l-6", title: "Interactive Challenge: Shopping Cart Manager", duration: "20 min", type: "simulation", completed: true, xp: 60 },
+        ],
+      },
+      {
+        id: "mod-3",
+        title: "Module 3: Functions & Modular Code",
+        lessons: [
+          { id: "py-l-7", title: "Defining Functions & Default Arguments", duration: "15 min", type: "interactive", completed: true, xp: 45 },
+          { id: "py-l-8", title: "Scope, Closures & Lambda Expressions", duration: "18 min", type: "interactive", completed: true, xp: 50 },
+          { id: "py-l-9", title: "Quiz: Function Mastery", duration: "12 min", type: "quiz", completed: true, xp: 50 },
+        ],
+      },
+      {
+        id: "mod-4",
+        title: "Module 4: Control Flow & Iterations",
+        lessons: [
+          { id: "py-l-21", title: "Conditionals & Logical Operators", duration: "10 min", type: "theory", completed: true, xp: 30 },
+          { id: "py-l-22", title: "Loops and Iterations", duration: "15 min", type: "interactive", completed: false, isCurrent: true, xp: 60 },
+          { id: "py-l-23", title: "List Comprehensions & Generators", duration: "18 min", type: "interactive", completed: false, xp: 55 },
+          { id: "py-l-24", title: "Simulation Lab: Prime Number Sieve", duration: "25 min", type: "simulation", completed: false, xp: 80 },
+        ],
+      },
+      {
+        id: "mod-5",
+        title: "Module 5: Object-Oriented Python",
+        lessons: [
+          { id: "py-l-25", title: "Classes, Objects & Attributes", duration: "20 min", type: "interactive", completed: false, xp: 60 },
+          { id: "py-l-26", title: "Inheritance & Polymorphism", duration: "22 min", type: "interactive", completed: false, xp: 70 },
+          { id: "py-l-27", title: "Final Capstone Project: Text RPG Game", duration: "45 min", type: "simulation", completed: false, xp: 150 },
+        ],
+      },
+    ],
+  },
+  {
+    id: "web-201",
+    title: "Interactive Web Mastery: Modern JS & React",
+    slug: "web-development-react",
+    category: "Web Development",
+    difficulty: "Beginner",
+    rating: 4.85,
+    ratingCount: 2310,
+    enrolledCount: 21500,
+    totalLessons: 45,
+    completedLessons: 36,
+    xpReward: 1200,
+    estimatedHours: 28,
+    image: "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?auto=format&fit=crop&q=80&w=600",
+    badgeIcon: "⚛️",
+    instructor: {
+      name: "Marcus Vance",
+      title: "Principal Frontend Engineer",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
+    },
+    description: "Learn how the modern web works. Build dynamic user interfaces with JavaScript ES6+, React components, state hooks, and API integrations.",
+    currentLesson: {
+      id: "web-l-37",
+      title: "Async/Await & Fetch API",
+      module: "Module 6: Asynchronous JavaScript",
+      duration: "14 min",
+      type: "interactive",
+    },
+    modules: [],
+  },
+  {
+    id: "algo-301",
+    title: "Data Structures & Algorithmic Quests",
+    slug: "data-structures-algorithms",
+    category: "Algorithms",
+    difficulty: "Intermediate",
+    rating: 4.95,
+    ratingCount: 980,
+    enrolledCount: 9800,
+    totalLessons: 40,
+    completedLessons: 12,
+    xpReward: 1500,
+    estimatedHours: 32,
+    image: "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&q=80&w=600",
+    badgeIcon: "⚡",
+    instructor: {
+      name: "Sophia Sterling",
+      title: "Algorithm Specialist & Competitive Programmer",
+      avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=200",
+    },
+    description: "Conquer Big-O notation, linked lists, binary search trees, dynamic programming, and graph traversals through gamified visualizations.",
+    currentLesson: {
+      id: "algo-l-13",
+      title: "Binary Search Tree Traversals (Inorder/Preorder)",
+      module: "Module 3: Trees & Graphs",
+      duration: "20 min",
+      type: "interactive",
+    },
+    modules: [],
+  },
+  {
+    id: "ai-401",
+    title: "Machine Learning & Neural Network Sims",
+    slug: "machine-learning-ai",
+    category: "AI & Data",
+    difficulty: "Advanced",
+    rating: 4.9,
+    ratingCount: 1120,
+    enrolledCount: 12100,
+    totalLessons: 28,
+    completedLessons: 0,
+    xpReward: 1800,
+    estimatedHours: 26,
+    image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=600",
+    badgeIcon: "🧠",
+    instructor: {
+      name: "Kenji Sato",
+      title: "AI Research Scientist",
+      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
+    },
+    description: "Tear open black-box algorithms! Visually tune weights, experiment with loss landscapes, and train computer vision models right in your browser.",
+    currentLesson: {
+      id: "ai-l-1",
+      title: "Perceptron Fundamentals & Gradient Descent",
+      module: "Module 1: Foundations of Deep Learning",
+      duration: "18 min",
+      type: "interactive",
+    },
+    modules: [],
+  },
+  {
+    id: "sec-202",
+    title: "Cybersecurity Defense Arena: Ethical Hacking",
+    slug: "cybersecurity-defense",
+    category: "Security",
+    difficulty: "Intermediate",
+    rating: 4.78,
+    ratingCount: 840,
+    enrolledCount: 8300,
+    totalLessons: 24,
+    completedLessons: 4,
+    xpReward: 950,
+    estimatedHours: 20,
+    image: "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=600",
+    badgeIcon: "🛡️",
+    instructor: {
+      name: "Tariq Al-Mansoor",
+      title: "Lead Penetration Tester & SecOps",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200",
+    },
+    description: "Learn web application security vulnerabilities: SQL injection, XSS, CSRF, and authentication bypasses in safely isolated sandbox labs.",
+    currentLesson: {
+      id: "sec-l-5",
+      title: "Defending Against Cross-Site Scripting (XSS)",
+      module: "Module 2: Web Injection Attacks",
+      duration: "16 min",
+      type: "simulation",
+    },
+    modules: [],
+  },
+  {
+    id: "game-102",
+    title: "Game Dev Essentials with 2D Physics & Canvas",
+    slug: "game-development-2d",
+    category: "Game Dev",
+    difficulty: "Beginner",
+    rating: 4.88,
+    ratingCount: 1650,
+    enrolledCount: 16400,
+    totalLessons: 36,
+    completedLessons: 0,
+    xpReward: 1400,
+    estimatedHours: 24,
+    image: "https://images.unsplash.com/photo-1556438064-2d7646166914?auto=format&fit=crop&q=80&w=600",
+    badgeIcon: "🎮",
+    instructor: {
+      name: "Claire Becker",
+      title: "Indie Game Developer & Physics Engineer",
+      avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200",
+    },
+    description: "Create responsive 2D games from scratch! Build collision detectors, particle systems, gravity simulators, and sound synthesizers.",
+    currentLesson: {
+      id: "game-l-1",
+      title: "Setting Up HTML Canvas & Game Loop",
+      module: "Module 1: The Core Loop",
+      duration: "15 min",
+      type: "interactive",
+    },
+    modules: [],
+  },
+];
+
+export const dailyChallengeData = {
+  id: "daily-20260929",
+  title: "Debug the Infinite Loop!",
+  category: "Python & Logic",
+  difficulty: "Medium",
+  xpReward: 100,
+  streakBonus: "+1 Day",
+  estimatedMinutes: 5,
+  timeLeft: "08h 34m",
+  completed: false,
+  description: "Find and fix the logic flaw causing the `while` loop to run indefinitely when searching for target elements.",
+  problemSnippet: `def find_target(arr, target):
+    i = 0
+    while i < len(arr):
+        if arr[i] == target:
+            return i
+        # BUG: Missing iterator update!
+    return -1`,
+  options: [
+    { id: "opt-1", text: "Add 'i += 1' inside the while block before or after the check", correct: true },
+    { id: "opt-2", text: "Change 'while i < len(arr)' to 'while i <= len(arr)'", correct: false },
+    { id: "opt-3", text: "Replace 'return i' with 'break'", correct: false },
+    { id: "opt-4", text: "Remove the 'return -1' statement", correct: false },
+  ],
+  explanation: "Without incrementing the loop index variable `i` (using `i += 1`), `i` remains 0 forever, creating an infinite loop whenever `arr[0]` is not the target.",
+};
+
+export const badgesData = [
+  {
+    id: "b-1",
+    name: "First Code Strike",
+    category: "Learning",
+    icon: "🚀",
+    color: "from-blue-500 to-indigo-600",
+    description: "Completed your first interactive lesson on EduPlay.",
+    unlocked: true,
+    unlockedAt: "3 weeks ago",
+    rarity: "Common",
+    xp: 50,
+  },
+  {
+    id: "b-2",
+    name: "7-Day Streak Warrior",
+    category: "Streaks",
+    icon: "🔥",
+    color: "from-amber-500 to-orange-600",
+    description: "Maintained a continuous daily learning streak for 7 days.",
+    unlocked: true,
+    unlockedAt: "1 week ago",
+    rarity: "Rare",
+    xp: 150,
+  },
+  {
+    id: "b-3",
+    name: "Bug Hunter",
+    category: "Mastery",
+    icon: "🐛",
+    color: "from-emerald-500 to-teal-600",
+    description: "Successfully identified and debugged 10 code logic errors.",
+    unlocked: true,
+    unlockedAt: "4 days ago",
+    rarity: "Rare",
+    xp: 200,
+  },
+  {
+    id: "b-4",
+    name: "Quiz Grandmaster",
+    category: "Mastery",
+    icon: "🎯",
+    color: "from-purple-500 to-pink-600",
+    description: "Scored 100% on 5 consecutive lesson quizzes.",
+    unlocked: true,
+    unlockedAt: "Yesterday",
+    rarity: "Epic",
+    xp: 300,
+  },
+  {
+    id: "b-5",
+    name: "Night Owl Coder",
+    category: "Special",
+    icon: "🦉",
+    color: "from-indigo-600 to-slate-800",
+    description: "Completed a challenging lesson between 10:00 PM and 2:00 AM.",
+    unlocked: true,
+    unlockedAt: "2 weeks ago",
+    rarity: "Common",
+    xp: 50,
+  },
+  {
+    id: "b-6",
+    name: "Speed Demon",
+    category: "Mastery",
+    icon: "⚡",
+    color: "from-yellow-400 to-amber-600",
+    description: "Finished a 10-question quiz in under 90 seconds with >90% accuracy.",
+    unlocked: true,
+    unlockedAt: "5 days ago",
+    rarity: "Rare",
+    xp: 150,
+  },
+  {
+    id: "b-7",
+    name: "Century Solved",
+    category: "Learning",
+    icon: "💯",
+    color: "from-rose-500 to-red-600",
+    description: "Solved over 100 interactive quiz questions and code prompts.",
+    unlocked: true,
+    unlockedAt: "2 days ago",
+    rarity: "Epic",
+    xp: 250,
+  },
+  {
+    id: "b-8",
+    name: "30-Day Legend",
+    category: "Streaks",
+    icon: "👑",
+    color: "from-amber-400 to-yellow-600",
+    description: "Maintain an unbroken daily learning streak for 30 consecutive days.",
+    unlocked: false,
+    progress: 14,
+    maxProgress: 30,
+    rarity: "Legendary",
+    xp: 500,
+  },
+  {
+    id: "b-9",
+    name: "Polyglot Architect",
+    category: "Learning",
+    icon: "🌐",
+    color: "from-cyan-500 to-blue-600",
+    description: "Complete at least one full module in 3 different programming languages.",
+    unlocked: false,
+    progress: 2,
+    maxProgress: 3,
+    rarity: "Epic",
+    xp: 350,
+  },
+  {
+    id: "b-10",
+    name: "Level 10 Titan",
+    category: "Special",
+    icon: "⚔️",
+    color: "from-violet-600 to-purple-900",
+    description: "Ascend to Level 10 on the EduPlay platform.",
+    unlocked: false,
+    progress: 7,
+    maxProgress: 10,
+    rarity: "Legendary",
+    xp: 600,
+  },
+];
+
+export const weeklyActivityData = [
+  { day: "Mon", hours: 1.2, xp: 240, lessons: 3 },
+  { day: "Tue", hours: 0.8, xp: 180, lessons: 2 },
+  { day: "Wed", hours: 1.5, xp: 320, lessons: 4 },
+  { day: "Thu", hours: 2.1, xp: 450, lessons: 5 },
+  { day: "Fri", hours: 1.0, xp: 210, lessons: 2 },
+  { day: "Sat", hours: 2.8, xp: 580, lessons: 6 },
+  { day: "Sun (Today)", hours: 1.4, xp: 310, lessons: 3 },
+];
+
+export const skillBreakdownData = [
+  { subject: "Python & Logic", score: 88, fullMark: 100 },
+  { subject: "Web & React", score: 92, fullMark: 100 },
+  { subject: "Algorithms", score: 76, fullMark: 100 },
+  { subject: "Data & AI", score: 64, fullMark: 100 },
+  { subject: "Security", score: 70, fullMark: 100 },
+  { subject: "System Design", score: 58, fullMark: 100 },
+];
+
+export const accuracyHistoryData = [
+  { week: "Wk 1", accuracy: 82, quizzes: 8 },
+  { week: "Wk 2", accuracy: 86, quizzes: 12 },
+  { week: "Wk 3", accuracy: 89, quizzes: 14 },
+  { week: "Wk 4", accuracy: 91, quizzes: 15 },
+  { week: "Wk 5", accuracy: 93, quizzes: 18 },
+  { week: "Wk 6 (Current)", accuracy: 96, quizzes: 16 },
+];
+
+export const leaderboardData = [
+  { rank: 1, name: "Liam Chen", avatar: "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&q=80&w=200", xp: 5420, streak: 32, league: "Diamond", badge: "🥇 Grandmaster", isCurrentUser: false },
+  { rank: 2, name: "Zara Patel", avatar: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&q=80&w=200", xp: 4890, streak: 28, league: "Diamond", badge: "🥈 Code Wizard", isCurrentUser: false },
+  { rank: 3, name: "Mateo Rossi", avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200", xp: 4310, streak: 21, league: "Diamond", badge: "🥉 Speedster", isCurrentUser: false },
+  { rank: 4, name: "Alex Morgan", avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=200", xp: 3420, streak: 14, league: "Diamond", badge: "⚡ Top 5", isCurrentUser: true },
+  { rank: 5, name: "Hana Takahashi", avatar: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&q=80&w=200", xp: 3290, streak: 19, league: "Diamond", badge: "🎯 Ace", isCurrentUser: false },
+  { rank: 6, name: "David Kim", avatar: "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&q=80&w=200", xp: 2980, streak: 11, league: "Diamond", badge: "🔥 Streaker", isCurrentUser: false },
+  { rank: 7, name: "Aisha Diallo", avatar: "https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=200", xp: 2850, streak: 9, league: "Diamond", badge: "💡 Scholar", isCurrentUser: false },
+  { rank: 8, name: "Lucas Müller", avatar: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&q=80&w=200", xp: 2640, streak: 15, league: "Diamond", badge: "🚀 Explorer", isCurrentUser: false },
+];
+
+export const learningPathsData = [
+  {
+    id: "path-fs",
+    title: "Full-Stack Web Architect",
+    description: "From semantic HTML & modern CSS to React, Node.js, databases and cloud deployment.",
+    totalXP: 5500,
+    estimatedWeeks: 12,
+    category: "Web & Software",
+    color: "from-blue-600 to-indigo-600",
+    nodes: [
+      { id: "n-1", title: "HTML5 & CSS Modern Grid/Flexbox", status: "completed", xp: 600, icon: "🎨" },
+      { id: "n-2", title: "JavaScript ES6+ & DOM Events", status: "completed", xp: 900, icon: "⚡" },
+      { id: "n-3", title: "React Component Lifecycle & Hooks", status: "current", xp: 1200, icon: "⚛️" },
+      { id: "n-4", title: "State Management & Next.js Basics", status: "locked", xp: 1100, icon: "🔄" },
+      { id: "n-5", title: "REST APIs, Node & Express Backends", status: "locked", xp: 1000, icon: "🚀" },
+      { id: "n-6", title: "PostgreSQL & Database Design", status: "locked", xp: 700, icon: "💾" },
+    ],
+  },
+  {
+    id: "path-py",
+    title: "Python Data & Automation Specialist",
+    description: "Automate boring tasks, analyze complex data sets, and build backend microservices with Python.",
+    totalXP: 4800,
+    estimatedWeeks: 10,
+    category: "Python & Data",
+    color: "from-emerald-600 to-teal-600",
+    nodes: [
+      { id: "py-n-1", title: "Python Syntax & Data Structures", status: "completed", xp: 800, icon: "🐍" },
+      { id: "py-n-2", title: "Loops, Iterations & Functions", status: "current", xp: 850, icon: "🔁" },
+      { id: "py-n-3", title: "Pandas & Data Wrangling", status: "locked", xp: 1100, icon: "📊" },
+      { id: "py-n-4", title: "Data Visualization & Dashboards", status: "locked", xp: 950, icon: "📈" },
+      { id: "py-n-5", title: "FastAPI Backend & Scrapers", status: "locked", xp: 1100, icon: "⚡" },
+    ],
+  },
+  {
+    id: "path-ai",
+    title: "AI & Neural Networks Engineer",
+    description: "Deep dive into machine learning models, transformers, prompt engineering, and model fine-tuning.",
+    totalXP: 6200,
+    estimatedWeeks: 14,
+    category: "AI & ML",
+    color: "from-purple-600 to-pink-600",
+    nodes: [
+      { id: "ai-n-1", title: "Linear Algebra & Probability for AI", status: "completed", xp: 900, icon: "📐" },
+      { id: "ai-n-2", title: "Scikit-Learn Classification & Regression", status: "locked", xp: 1200, icon: "🤖" },
+      { id: "ai-n-3", title: "Neural Networks & Backpropagation", status: "locked", xp: 1400, icon: "🧠" },
+      { id: "ai-n-4", title: "Computer Vision & CNNs", status: "locked", xp: 1300, icon: "👁️" },
+      { id: "ai-n-5", title: "Transformers & LLM Integrations", status: "locked", xp: 1400, icon: "✨" },
+    ],
+  },
+];
+
+export const sampleLessonContent = {
+  courseId: "py-101",
+  lessonId: "py-l-22",
+  title: "Loops and Iterations in Python",
+  moduleTitle: "Module 4: Control Flow & Iterations",
+  xpReward: 60,
+  steps: [
+    {
+      type: "concept",
+      title: "Understanding 'for' and 'while' Loops",
+      content: `In Python, loops allow you to execute a block of code repeatedly. The two primary types of loops are **for loops** (iterating over a sequence like a list, tuple, or range) and **while loops** (running as long as a condition evaluates to True).`,
+      codeExample: `# Iterating over a list
+fruits = ["Apple", "Mango", "Blueberry"]
+for fruit in fruits:
+    print(f"Delicious {fruit}!")
+
+# Repeating a counter with a while loop
+count = 3
+while count > 0:
+    print(f"Liftoff in {count}...")
+    count -= 1
+print("🚀 Blastoff!")`,
+      tip: "Remember that Python uses indentation (4 spaces) rather than curly braces to define code blocks inside loops!",
+    },
+    {
+      type: "quiz",
+      title: "Quick Knowledge Check",
+      question: "What will the following Python loop output?\n```python\nfor i in range(1, 6, 2):\n    print(i, end=' ')\n```",
+      options: [
+        { id: "a", text: "1 2 3 4 5", correct: false },
+        { id: "b", text: "1 3 5", correct: true },
+        { id: "c", text: "2 4 6", correct: false },
+        { id: "d", text: "1 3 5 7", correct: false },
+      ],
+      explanation: "range(start, stop, step) starts at 1, increments by 2 each time, and stops before reaching 6. So it generates: 1, 3, 5.",
+    },
+    {
+      type: "simulator",
+      title: "Interactive Code Challenge: Filter Even Squares",
+      instructions: "Complete the function `get_even_squares(numbers)` that takes a list of integers, iterates through them using a loop, and returns a new list containing the squares of only the even numbers.",
+      starterCode: `def get_even_squares(numbers):
+    result = []
+    # Write your loop here:
+    for n in numbers:
+        if n % 2 == 0:
+            result.append(n ** 2)
+    return result
+
+# Test cases
+test_list = [1, 2, 3, 4, 5, 6]
+print("Result:", get_even_squares(test_list))
+`,
+      expectedOutput: "Result: [4, 16, 36]",
+      hint: "Use `if n % 2 == 0:` to check if a number is even, and `n ** 2` to calculate its square.",
+    },
+  ],
+};
+
+export const notificationsData = [
+  { id: "notif-1", title: "Streak Preserved! 🔥", message: "You logged in today! Your streak is now 14 days strong.", time: "10 mins ago", unread: true },
+  { id: "notif-2", title: "Daily Challenge Ready 🎯", message: "'Debug the Infinite Loop!' is waiting for you with +100 XP.", time: "1 hour ago", unread: true },
+  { id: "notif-3", title: "Leaderboard Update 🏆", message: "You climbed to Rank #4 in the Diamond League! Only 890 XP to Top 3.", time: "Yesterday", unread: false },
+  { id: "notif-4", title: "New Badge Unlocked 🎯", message: "You earned 'Quiz Grandmaster' for scoring 100% on 5 quizzes.", time: "2 days ago", unread: false },
+];

@@ -1,0 +1,342 @@
+[
+  {
+    "id": "py-101",
+    "title": "Python Programming: Zero to Hero",
+    "slug": "python-programming",
+    "category": "Python",
+    "difficulty": "Beginner",
+    "rating": 4.9,
+    "ratingCount": 1420,
+    "enrolledCount": 14280,
+    "totalLessons": 32,
+    "completedLessons": 21,
+    "xpReward": 850,
+    "estimatedHours": 18,
+    "image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&q=80&w=600",
+    "badgeIcon": "🐍",
+    "instructor": {
+      "name": "Dr. Elena Rostova",
+      "title": "Senior Python Architect & CS Professor",
+      "avatar": "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200"
+    },
+    "description": "Master Python fundamentals from data types to object-oriented programming with interactive coding challenges and automated unit tests.",
+    "currentLesson": {
+      "id": "py-l-22",
+      "title": "Loops and Iterations",
+      "module": "Module 4: Control Flow & Iterations",
+      "duration": "12 min",
+      "type": "interactive"
+    },
+    "modules": [
+      {
+        "id": "mod-1",
+        "title": "Module 1: Foundations & Variables",
+        "lessons": [
+          {
+            "id": "py-l-1",
+            "title": "Introduction to Python & Syntax",
+            "duration": "8 min",
+            "type": "theory",
+            "completed": true,
+            "xp": 25
+          },
+          {
+            "id": "py-l-2",
+            "title": "Variables, Numbers & String Formatting",
+            "duration": "12 min",
+            "type": "interactive",
+            "completed": true,
+            "xp": 35
+          },
+          {
+            "id": "py-l-3",
+            "title": "Quiz: Data Types & Casting",
+            "duration": "10 min",
+            "type": "quiz",
+            "completed": true,
+            "xp": 50
+          }
+        ]
+      },
+      {
+        "id": "mod-2",
+        "title": "Module 2: Lists, Dictionaries & Tuples",
+        "lessons": [
+          {
+            "id": "py-l-4",
+            "title": "Lists & Array Operations",
+            "duration": "15 min",
+            "type": "interactive",
+            "completed": true,
+            "xp": 40
+          },
+          {
+            "id": "py-l-5",
+            "title": "Dictionary Key-Value Maps",
+            "duration": "14 min",
+            "type": "interactive",
+            "completed": true,
+            "xp": 40
+          },
+          {
+            "id": "py-l-6",
+            "title": "Interactive Challenge: Shopping Cart Manager",
+            "duration": "20 min",
+            "type": "simulation",
+            "completed": true,
+            "xp": 60
+          }
+        ]
+      },
+      {
+        "id": "mod-3",
+        "title": "Module 3: Functions & Modular Code",
+        "lessons": [
+          {
+            "id": "py-l-7",
+            "title": "Defining Functions & Default Arguments",
+            "duration": "15 min",
+            "type": "interactive",
+            "completed": true,
+            "xp": 45
+          },
+          {
+            "id": "py-l-8",
+            "title": "Scope, Closures & Lambda Expressions",
+            "duration": "18 min",
+            "type": "interactive",
+            "completed": true,
+            "xp": 50
+          },
+          {
+            "id": "py-l-9",
+            "title": "Quiz: Function Mastery",
+            "duration": "12 min",
+            "type": "quiz",
+            "completed": true,
+            "xp": 50
+          }
+        ]
+      },
+      {
+        "id": "mod-4",
+        "title": "Module 4: Control Flow & Iterations",
+        "lessons": [
+          {
+            "id": "py-l-21",
+            "title": "Conditionals & Logical Operators",
+            "duration": "10 min",
+            "type": "theory",
+            "completed": true,
+            "xp": 30
+          },
+          {
+            "id": "py-l-22",
+            "title": "Loops and Iterations",
+            "duration": "15 min",
+            "type": "interactive",
+            "completed": false,
+            "isCurrent": true,
+            "xp": 60
+          },
+          {
+            "id": "py-l-23",
+            "title": "List Comprehensions & Generators",
+            "duration": "18 min",
+            "type": "interactive",
+            "completed": false,
+            "xp": 55
+          },
+          {
+            "id": "py-l-24",
+            "title": "Simulation Lab: Prime Number Sieve",
+            "duration": "25 min",
+            "type": "simulation",
+            "completed": false,
+            "xp": 80
+          }
+        ]
+      },
+      {
+        "id": "mod-5",
+        "title": "Module 5: Object-Oriented Python",
+        "lessons": [
+          {
+            "id": "py-l-25",
+            "title": "Classes, Objects & Attributes",
+            "duration": "20 min",
+            "type": "interactive",
+            "completed": false,
+            "xp": 60
+          },
+          {
+            "id": "py-l-26",
+            "title": "Inheritance & Polymorphism",
+            "duration": "22 min",
+            "type": "interactive",
+            "completed": false,
+            "xp": 70
+          },
+          {
+            "id": "py-l-27",
+            "title": "Final Capstone Project: Text RPG Game",
+            "duration": "45 min",
+            "type": "simulation",
+            "completed": false,
+            "xp": 150
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "web-201",
+    "title": "Interactive Web Mastery: Modern JS & React",
+    "slug": "web-development-react",
+    "category": "Web Development",
+    "difficulty": "Beginner",
+    "rating": 4.85,
+    "ratingCount": 2310,
+    "enrolledCount": 21500,
+    "totalLessons": 45,
+    "completedLessons": 36,
+    "xpReward": 1200,
+    "estimatedHours": 28,
+    "image": "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?auto=format&fit=crop&q=80&w=600",
+    "badgeIcon": "⚛️",
+    "instructor": {
+      "name": "Marcus Vance",
+      "title": "Principal Frontend Engineer",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200"
+    },
+    "description": "Learn how the modern web works. Build dynamic user interfaces with JavaScript ES6+, React components, state hooks, and API integrations.",
+    "currentLesson": {
+      "id": "web-l-37",
+      "title": "Async/Await & Fetch API",
+      "module": "Module 6: Asynchronous JavaScript",
+      "duration": "14 min",
+      "type": "interactive"
+    },
+    "modules": []
+  },
+  {
+    "id": "algo-301",
+    "title": "Data Structures & Algorithmic Quests",
+    "slug": "data-structures-algorithms",
+    "category": "Algorithms",
+    "difficulty": "Intermediate",
+    "rating": 4.95,
+    "ratingCount": 980,
+    "enrolledCount": 9800,
+    "totalLessons": 40,
+    "completedLessons": 12,
+    "xpReward": 1500,
+    "estimatedHours": 32,
+    "image": "https://images.unsplash.com/photo-1509228468518-180dd4864904?auto=format&fit=crop&q=80&w=600",
+    "badgeIcon": "⚡",
+    "instructor": {
+      "name": "Sophia Sterling",
+      "title": "Algorithm Specialist & Competitive Programmer",
+      "avatar": "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=200"
+    },
+    "description": "Conquer Big-O notation, linked lists, binary search trees, dynamic programming, and graph traversals through gamified visualizations.",
+    "currentLesson": {
+      "id": "algo-l-13",
+      "title": "Binary Search Tree Traversals (Inorder/Preorder)",
+      "module": "Module 3: Trees & Graphs",
+      "duration": "20 min",
+      "type": "interactive"
+    },
+    "modules": []
+  },
+  {
+    "id": "ai-401",
+    "title": "Machine Learning & Neural Network Sims",
+    "slug": "machine-learning-ai",
+    "category": "AI & Data",
+    "difficulty": "Advanced",
+    "rating": 4.9,
+    "ratingCount": 1120,
+    "enrolledCount": 12100,
+    "totalLessons": 28,
+    "completedLessons": 0,
+    "xpReward": 1800,
+    "estimatedHours": 26,
+    "image": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&q=80&w=600",
+    "badgeIcon": "🧠",
+    "instructor": {
+      "name": "Kenji Sato",
+      "title": "AI Research Scientist",
+      "avatar": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200"
+    },
+    "description": "Tear open black-box algorithms! Visually tune weights, experiment with loss landscapes, and train computer vision models right in your browser.",
+    "currentLesson": {
+      "id": "ai-l-1",
+      "title": "Perceptron Fundamentals & Gradient Descent",
+      "module": "Module 1: Foundations of Deep Learning",
+      "duration": "18 min",
+      "type": "interactive"
+    },
+    "modules": []
+  },
+  {
+    "id": "sec-202",
+    "title": "Cybersecurity Defense Arena: Ethical Hacking",
+    "slug": "cybersecurity-defense",
+    "category": "Security",
+    "difficulty": "Intermediate",
+    "rating": 4.78,
+    "ratingCount": 840,
+    "enrolledCount": 8300,
+    "totalLessons": 24,
+    "completedLessons": 4,
+    "xpReward": 950,
+    "estimatedHours": 20,
+    "image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&q=80&w=600",
+    "badgeIcon": "🛡️",
+    "instructor": {
+      "name": "Tariq Al-Mansoor",
+      "title": "Lead Penetration Tester & SecOps",
+      "avatar": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=200"
+    },
+    "description": "Learn web application security vulnerabilities: SQL injection, XSS, CSRF, and authentication bypasses in safely isolated sandbox labs.",
+    "currentLesson": {
+      "id": "sec-l-5",
+      "title": "Defending Against Cross-Site Scripting (XSS)",
+      "module": "Module 2: Web Injection Attacks",
+      "duration": "16 min",
+      "type": "simulation"
+    },
+    "modules": []
+  },
+  {
+    "id": "game-102",
+    "title": "Game Dev Essentials with 2D Physics & Canvas",
+    "slug": "game-development-2d",
+    "category": "Game Dev",
+    "difficulty": "Beginner",
+    "rating": 4.88,
+    "ratingCount": 1650,
+    "enrolledCount": 16400,
+    "totalLessons": 36,
+    "completedLessons": 0,
+    "xpReward": 1400,
+    "estimatedHours": 24,
+    "image": "https://images.unsplash.com/photo-1556438064-2d7646166914?auto=format&fit=crop&q=80&w=600",
+    "badgeIcon": "🎮",
+    "instructor": {
+      "name": "Claire Becker",
+      "title": "Indie Game Developer & Physics Engineer",
+      "avatar": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200"
+    },
+    "description": "Create responsive 2D games from scratch! Build collision detectors, particle systems, gravity simulators, and sound synthesizers.",
+    "currentLesson": {
+      "id": "game-l-1",
+      "title": "Setting Up HTML Canvas & Game Loop",
+      "module": "Module 1: The Core Loop",
+      "duration": "15 min",
+      "type": "interactive"
+    },
+    "modules": []
+  }
+]

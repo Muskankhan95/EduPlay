@@ -1,0 +1,39 @@
+[
+  {
+    "id": "daily-20260929",
+    "title": "Debug the Infinite Loop!",
+    "category": "Python & Logic",
+    "difficulty": "Medium",
+    "xpReward": 100,
+    "streakBonus": "+1 Day",
+    "estimatedMinutes": 5,
+    "timeLeft": "08h 34m",
+    "completed": true,
+    "description": "Find and fix the logic flaw causing the `while` loop to run indefinitely when searching for target elements.",
+    "problemSnippet": "def find_target(arr, target):\n    i = 0\n    while i < len(arr):\n        if arr[i] == target:\n            return i\n        # BUG: Missing iterator update!\n    return -1",
+    "options": [
+      {
+        "id": "opt-1",
+        "text": "Add 'i += 1' inside the while block before or after the check",
+        "correct": true
+      },
+      {
+        "id": "opt-2",
+        "text": "Change 'while i < len(arr)' to 'while i <= len(arr)'",
+        "correct": false
+      },
+      {
+        "id": "opt-3",
+        "text": "Replace 'return i' with 'break'",
+        "correct": false
+      },
+      {
+        "id": "opt-4",
+        "text": "Remove the 'return -1' statement",
+        "correct": false
+      }
+    ],
+    "explanation": "Without incrementing the loop index variable `i` (using `i += 1`), `i` remains 0 forever, creating an infinite loop whenever `arr[0]` is not the target.",
+    "updatedAt": "2026-09-29T14:19:57.157Z"
+  }
+]
