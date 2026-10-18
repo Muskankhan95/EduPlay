@@ -1,4 +1,7 @@
 import dns from "dns";
+import path from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
 
 dns.setServers(["8.8.8.8", "1.1.1.1"]);
 import express from "express";
@@ -102,6 +105,21 @@ app.use("/api/analytics", analyticsRoutes);
 app.use("/api/notifications", notificationRoutes);
 app.use("/api/games", gameRoutes);
 app.use("/api/learning-paths", learningPathRoutes);
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const distPath = path.resolve(__dirname, "../dist");
+
+// Serve frontend in production or if dist directory exists
+if (fs.existsSync(distPath)) {
+  app.use(express.static(distPath));
+  app.get("*", (req, res, next) => {
+    if (req.path.startsWith("/api")) {
+      return next();
+    }
+    res.sendFile(path.join(distPath, "index.html"));
+  });
+}
 
 // Fallbacks
 app.use(notFoundHandler);
