@@ -373,7 +373,6 @@ export const useEduQuest = ({
       }
     }
   };
-  proceedToNextClueRef.current = proceedToNextClue;
 
   // Request a hint during challenge
   const requestHint = () => {
@@ -469,7 +468,11 @@ export const useEduQuest = ({
     hintsUsed,
     onQuestComplete,
   ]);
-  handleLevelCompleteRef.current = handleLevelComplete;
+
+  useEffect(() => {
+    proceedToNextClueRef.current = proceedToNextClue;
+    handleLevelCompleteRef.current = handleLevelComplete;
+  });
 
   // Restart Current Level
   const restartLevel = () => {

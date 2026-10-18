@@ -24,10 +24,11 @@ export const RiddleModal = ({
   onClose,
   lives = 3,
 }) => {
+  const [selectedOption, setSelectedOption] = useState(null);
+
   if (!challenge) return null;
 
   const { clue, question } = challenge;
-  const [selectedOption, setSelectedOption] = useState(null);
 
   const handleSelect = (optionText) => {
     if (feedback && feedback.isCorrect) return;

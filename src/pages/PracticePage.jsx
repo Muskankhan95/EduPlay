@@ -34,7 +34,9 @@ export const PracticePage = () => {
   const quizAdvanceTimeoutRef = useRef(null);
   const quizAnswerLockedRef = useRef(false);
   const currentQuizQuestionIndexRef = useRef(currentQuizQ);
-  currentQuizQuestionIndexRef.current = currentQuizQ;
+  useEffect(() => {
+    currentQuizQuestionIndexRef.current = currentQuizQ;
+  });
 
   useEffect(() => () => clearTimeout(quizAdvanceTimeoutRef.current), []);
 

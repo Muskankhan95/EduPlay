@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useLearning } from '../context/LearningContext';
 import { questionsPool, gameModes } from '../data/gameData';
 import { useGameEngine } from '../hooks/useGameEngine';
@@ -15,59 +15,14 @@ import { ConceptMatchGame } from '../components/game/ConceptMatchGame';
 import { TargetBlaster } from '../components/game/TargetBlaster';
 import { EduQuest } from '../components/eduquest/EduQuest';
 import {
-  Sparkles,
   ArrowRight,
-  HelpCircle,
-  AlertCircle,
   CheckCircle2,
-  Zap,
-  Flame,
-  ShieldCheck,
-  TrendingUp
+  AlertCircle,
+  TrendingUp,
 } from 'lucide-react';
 
-export const GameScreenPage = () => {
-  const { modeId } = useParams();
-  const navigate = useNavigate();
-  const { user, courses, addXP } = useLearning();
-
-  const activeMode = gameModes.find((m) => m.id === modeId) || gameModes[0];
+const StandardGameArena = ({ activeMode, user, addXP, navigate }) => {
   const [isReviewOpen, setIsReviewOpen] = useState(false);
-
-  // If eduquest, render the EduQuest Learning Treasure Hunt!
-  if (activeMode.id === 'eduquest' || modeId === 'eduquest') {
-    return (
-      <EduQuest
-        userId={user?.id || 'usr_101'}
-        courses={courses}
-        addXPToUser={(amount, reason) => addXP(amount, reason, { syncBackend: false })}
-        onExit={() => navigate('/app/play')}
-      />
-    );
-  }
-
-  // If target-blaster, render the interactive shooting quiz arcade
-  if (activeMode.id === 'target-blaster') {
-    return (
-      <TargetBlaster
-        userId={user?.id || 'usr_101'}
-        onExit={() => navigate('/app/play')}
-        addXPToUser={(amount, reason) => addXP(amount, reason, { syncBackend: false })}
-      />
-    );
-  }
-
-  // If concept-match, render the dedicated matching arena
-  if (activeMode.id === 'concept-match') {
-    return (
-      <div className="min-h-screen bg-slate-950 text-white p-4 sm:p-6 lg:p-8 flex flex-col justify-center items-center">
-        <ConceptMatchGame
-          onExit={() => navigate('/app/play')}
-          addXPToUser={addXP}
-        />
-      </div>
-    );
-  }
 
   // Load questions for the active mode
   const questions = questionsPool[activeMode.id] || questionsPool['quiz-challenge'];
@@ -100,7 +55,6 @@ export const GameScreenPage = () => {
     bossHP,
     maxBossHP,
     floatingXP,
-    streakMilestone,
     difficulty,
     adaptiveMessage,
     isGameOver,
@@ -112,7 +66,6 @@ export const GameScreenPage = () => {
 
   // Selected option object
   const selectedOption = currentQuestion?.options?.find((o) => o.id === selectedOptionId);
-  const correctOption = currentQuestion?.options?.find((o) => o.isCorrect);
   const isCorrect = selectedOption?.isCorrect;
 
   return (
@@ -252,5 +205,57 @@ export const GameScreenPage = () => {
         onClose={() => setIsReviewOpen(false)}
       />
     </div>
+  );
+};
+
+export const GameScreenPage = () => {
+  const { modeId } = useParams();
+  const navigate = useNavigate();
+  const { user, courses, addXP } = useLearning();
+
+  const activeMode = gameModes.find((m) => m.id === modeId) || gameModes[0];
+
+  // If eduquest, render the EduQuest Learning Treasure Hunt!
+  if (activeMode.id === 'eduquest' || modeId === 'eduquest') {
+    return (
+      <EduQuest
+        userId={user?.id || 'usr_101'}
+        courses={courses}
+        addXPToUser={(amount, reason) => addXP(amount, reason, { syncBackend: false })}
+        onExit={() => navigate('/app/play')}
+      />
+    );
+  }
+
+  // If target-blaster, render the interactive shooting quiz arcade
+  if (activeMode.id === 'target-blaster') {
+    return (
+      <TargetBlaster
+        userId={user?.id || 'usr_101'}
+        onExit={() => navigate('/app/play')}
+        addXPToUser={(amount, reason) => addXP(amount, reason, { syncBackend: false })}
+      />
+    );
+  }
+
+  // If concept-match, render the dedicated matching arena
+  if (activeMode.id === 'concept-match') {
+    return (
+      <div className="min-h-screen bg-slate-950 text-white p-4 sm:p-6 lg:p-8 flex flex-col justify-center items-center">
+        <ConceptMatchGame
+          onExit={() => navigate('/app/play')}
+          addXPToUser={addXP}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <StandardGameArena
+      activeMode={activeMode}
+      user={user}
+      addXP={addXP}
+      navigate={navigate}
+    />
   );
 };

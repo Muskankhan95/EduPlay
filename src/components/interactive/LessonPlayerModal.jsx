@@ -41,7 +41,6 @@ export const LessonPlayerModal = () => {
   const quizSubmissionLockedRef = useRef(false);
   const currentStepIndexRef = useRef(currentStepIndex);
   const nextStepRef = useRef(null);
-  currentStepIndexRef.current = currentStepIndex;
 
   const currentStep = sampleLessonContent.steps[currentStepIndex];
   const totalSteps = sampleLessonContent.steps.length;
@@ -55,7 +54,11 @@ export const LessonPlayerModal = () => {
       quizSubmissionLockedRef.current = false;
     }
   };
-  nextStepRef.current = handleNextStep;
+
+  useEffect(() => {
+    currentStepIndexRef.current = currentStepIndex;
+    nextStepRef.current = handleNextStep;
+  });
 
   useEffect(() => {
     if (!quizSubmitted || currentStepIndex >= totalSteps - 1) return undefined;

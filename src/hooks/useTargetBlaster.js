@@ -66,7 +66,6 @@ export const useTargetBlaster = ({
 
   const currentQuestion = activeQuestions[currentQuestionIndex] || activeQuestions[0];
   const totalQuestions = activeQuestions.length;
-  questionIndexRef.current = currentQuestionIndex;
 
   useEffect(() => () => clearTimeout(autoAdvanceTimeoutRef.current), []);
 
@@ -327,7 +326,10 @@ export const useTargetBlaster = ({
       finishGame();
     }
   };
-  nextQuestionRef.current = nextQuestion;
+  useEffect(() => {
+    questionIndexRef.current = currentQuestionIndex;
+    nextQuestionRef.current = nextQuestion;
+  });
 
   // Retry same question after hint (if lives remain)
   const retryQuestion = () => {

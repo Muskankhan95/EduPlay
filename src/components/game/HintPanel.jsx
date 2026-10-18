@@ -19,10 +19,9 @@ export const HintPanel = ({
   onNext,
   isLastQuestion = false,
 }) => {
-  if (!currentQuestion) return null;
-
   // Optional keyboard navigation (Enter/Space to advance)
   useEffect(() => {
+    if (!currentQuestion) return;
     const handleKeyDown = (e) => {
       if (e.key === 'Enter') {
         if (isCorrect || lives === 0) {
@@ -32,7 +31,9 @@ export const HintPanel = ({
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isCorrect, lives, onNext]);
+  }, [currentQuestion, isCorrect, lives, onNext]);
+
+  if (!currentQuestion) return null;
 
   return (
     <motion.div

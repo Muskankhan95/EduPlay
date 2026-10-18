@@ -52,7 +52,6 @@ export const useGameEngine = ({
 
   const currentQuestion = questions[currentQuestionIndex] || null;
   const totalQuestions = questions.length;
-  questionIndexRef.current = currentQuestionIndex;
 
   useEffect(() => () => clearTimeout(autoAdvanceTimeoutRef.current), []);
 
@@ -276,7 +275,10 @@ export const useGameEngine = ({
       finishGame();
     }
   };
-  nextQuestionRef.current = nextQuestion;
+  useEffect(() => {
+    questionIndexRef.current = currentQuestionIndex;
+    nextQuestionRef.current = nextQuestion;
+  });
 
   // Finish Game & calculate final bonuses
   const finishGame = useCallback(() => {
